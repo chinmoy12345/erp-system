@@ -11,7 +11,7 @@ interface CanProps {
 }
 
 export function Can({ permission, mode = 'any', children, fallback = null }: CanProps) {
-  const { can, canAny, canAll } = usePermissions();
+  const { canAny, canAll } = usePermissions();
   const permissions = Array.isArray(permission) ? permission : [permission];
   let allowed = false;
   if (mode === 'any') allowed = canAny(permissions);
