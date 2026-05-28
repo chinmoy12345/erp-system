@@ -37,7 +37,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
           userName="Admin Owner"
         />
         <main className="flex-1 p-6">{children}</main>
-        {/* <OwnerFooter /> */}  {/* optional */}
+        <OwnerFooter /> 
       </div>
     </div>
   );

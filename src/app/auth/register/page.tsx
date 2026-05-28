@@ -1,4 +1,3 @@
-// src/app/auth/register/page.tsx
 "use client";
 
 import { useState, FormEvent } from "react";
@@ -6,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
   Eye, EyeOff, LayoutDashboard, Mail, Lock, ArrowRight, 
-  CheckCircle, TrendingUp, Package, Users, Zap, User, Building2 
+  TrendingUp, Package, Users, Zap, User, Building2 
 } from "lucide-react";
 
 export default function RegisterPage() {
@@ -26,7 +25,6 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
 
-    // Validation
     if (!fullName || !email || !password || !confirmPassword) {
       setError("Please fill in all required fields");
       return;
@@ -65,13 +63,13 @@ export default function RegisterPage() {
         throw new Error(data.message || "Registration failed");
       }
 
-      // Auto-login after registration (optional)
       const { access_token, user } = data;
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("user", JSON.stringify(user));
       router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message || "Registration failed. Please try again.");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Registration failed. Please try again.";
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -316,7 +314,7 @@ export default function RegisterPage() {
   );
 }
 
-function ShieldIcon(props: any) {
+function ShieldIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
