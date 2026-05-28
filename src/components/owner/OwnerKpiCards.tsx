@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, Users, CreditCard, DollarSign, TrendingUp, UserPlus } from "lucide-react";
+import { Building2, Users, CreditCard, DollarSign, UserPlus } from "lucide-react";
 
 const kpiData = [
   {
