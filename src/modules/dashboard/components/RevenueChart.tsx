@@ -22,10 +22,31 @@ export function RevenueChart() {
             </linearGradient>
           </defs>
           <XAxis dataKey="month" stroke="#888" fontSize={12} />
-          <YAxis yAxisId="left" tickFormatter={(v) => `$${v / 1000}k`} stroke="#888" fontSize={12} />
+          <YAxis
+            yAxisId="left"
+            tickFormatter={(v) => {
+              const value = v ?? 0;
+              return `$${value / 1000}k`;
+            }}
+            stroke="#888"
+            fontSize={12}
+          />
           <YAxis yAxisId="right" orientation="right" stroke="#888" fontSize={12} />
-          <Tooltip formatter={(v, name) => [`$${v.toLocaleString()}`, name === "revenue" ? "Revenue" : "Orders"]} />
-          <Area yAxisId="left" type="monotone" dataKey="revenue" stroke="#3b82f6" fill="url(#revenueGrad)" strokeWidth={2} name="Revenue" />
+          <Tooltip
+            formatter={(v, name) => {
+              const value = v ?? 0;
+              return [`$${value.toLocaleString()}`, name === "revenue" ? "Revenue" : "Orders"];
+            }}
+          />
+          <Area
+            yAxisId="left"
+            type="monotone"
+            dataKey="revenue"
+            stroke="#3b82f6"
+            fill="url(#revenueGrad)"
+            strokeWidth={2}
+            name="Revenue"
+          />
         </AreaChart>
       </ResponsiveContainer>
     </div>

@@ -9,11 +9,24 @@ export function TopProductsBar() {
       <p className="mb-4 text-sm text-gray-500">By units sold</p>
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={TOP_PRODUCTS} layout="vertical" margin={{ left: 80 }}>
-          <XAxis type="number" tickFormatter={(v) => `${v / 1000}k`} />
+          <XAxis
+            type="number"
+            tickFormatter={(v) => {
+              const value = v ?? 0;
+              return `${value / 1000}k`;
+            }}
+          />
           <YAxis type="category" dataKey="name" width={80} tick={{ fontSize: 12 }} />
-          <Tooltip formatter={(v) => [`${v.toLocaleString()} units`, "Sales"]} />
+          <Tooltip
+            formatter={(v) => {
+              const value = v ?? 0;
+              return [`${value.toLocaleString()} units`, "Sales"];
+            }}
+          />
           <Bar dataKey="sales" radius={[0, 4, 4, 0]}>
-            {TOP_PRODUCTS.map((entry, idx) => (<Cell key={`cell-${idx}`} fill={entry.color} />))}
+            {TOP_PRODUCTS.map((entry, idx) => (
+              <Cell key={`cell-${idx}`} fill={entry.color} />
+            ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>

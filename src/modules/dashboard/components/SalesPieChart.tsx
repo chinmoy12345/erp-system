@@ -9,9 +9,22 @@ export function SalesPieChart() {
       <p className="mb-4 text-sm text-gray-500">Revenue distribution</p>
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
-          <Pie data={SALES_CATEGORIES} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}
-            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={true}>
-            {SALES_CATEGORIES.map((entry, idx) => (<Cell key={`cell-${idx}`} fill={entry.color} />))}
+          <Pie
+            data={SALES_CATEGORIES}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            label={({ name, percent }) => {
+              const percentage = percent ?? 0;
+              return `${name} ${(percentage * 100).toFixed(0)}%`;
+            }}
+            labelLine={true}
+          >
+            {SALES_CATEGORIES.map((entry, idx) => (
+              <Cell key={`cell-${idx}`} fill={entry.color} />
+            ))}
           </Pie>
           <Tooltip />
         </PieChart>
