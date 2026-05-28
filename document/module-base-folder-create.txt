@@ -1,0 +1,26 @@
+Step‑by‑Step Migration (from current code to modules)
+1. Create the Module Folders
+bash
+
+mkdir -p src/modules/auth/{components,hooks,services,types}
+mkdir -p src/modules/dashboard/{components,hooks,services,types}
+mkdir -p src/modules/owner/{components,hooks,services,types}
+mkdir -p src/shared/{components,lib,hooks,types,constants,providers}
+
+
+
+
+2. Move Existing Code into Modules
+Auth Module
+
+Take your LoginForm and RegisterForm (currently in src/components/auth/ or inside pages) and move them into:
+
+    src/modules/auth/components/LoginForm.tsx
+
+    src/modules/auth/components/RegisterForm.tsx
+
+    src/modules/auth/hooks/useAuth.ts (move from src/hooks/useAuth)
+
+    src/modules/auth/services/authService.ts (API calls)
+
+    src/modules/auth/types/index.ts (AuthUser, LoginCredentials)

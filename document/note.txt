@@ -1,0 +1,9 @@
+Layer	Tech
+Frontend	Next 15
+UI	ShadCN
+Backend	Express
+ORM	Prisma 6
+DB	PostgreSQL
+Cache	Redis
+Validation	Zod 3
+State	Zustand + React Query

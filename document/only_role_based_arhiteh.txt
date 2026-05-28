@@ -1,0 +1,14 @@
+shared/
+├── components/
+│   └── rbac/
+│       ├── Can.tsx
+│       └── RoleGuard.tsx
+├── hooks/
+│   └── usePermissions.ts
+├── lib/
+│   ├── permissions.ts
+│   └── route-access.ts
+├── providers/
+│   └── AuthProvider.tsx   (updated)
+└── types/
+    └── rbac.ts

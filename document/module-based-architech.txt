@@ -1,0 +1,370 @@
+client/
+├── public/
+├── src/
+│   ├── app/                        # Next.js App Router routes (only layout & page entry points)
+│   │   ├── (auth)/                 # Auth route group (login, register)
+│   │   │   ├── login/page.tsx
+│   │   │   └── register/page.tsx
+│   │   ├── (dashboard)/            # Main app route group
+│   │   │   ├── layout.tsx          # Dashboard layout (imports from modules)
+│   │   │   └── page.tsx            # Redirects to /dashboard/home
+│   │   ├── owner/                  # Owner portal route
+│   │   │   ├── layout.tsx
+│   │   │   └── dashboard/page.tsx
+│   │   ├── layout.tsx              # Root layout with providers
+│   │   └── page.tsx                # Landing page
+│   ├── modules/                    # ******** Core business modules
+│   │   ├── auth/                   # Authentication module
+│   │   │   ├── components/
+│   │   │   │   ├── LoginForm.tsx
+│   │   │   │   └── RegisterForm.tsx
+│   │   │   ├── hooks/
+│   │   │   │   └── useAuth.ts
+│   │   │   ├── services/
+│   │   │   │   └── authService.ts
+│   │   │   ├── types/
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts           # public exports
+│   │   ├── dashboard/              # Main user dashboard module
+│   │   │   ├── components/
+│   │   │   │   ├── KpiCardsGrid.tsx
+│   │   │   │   ├── RevenueChart.tsx
+│   │   │   │   ├── RecentOrdersTable.tsx
+│   │   │   │   └── ...
+│   │   │   ├── hooks/
+│   │   │   │   └── useDashboardData.ts
+│   │   │   ├── services/
+│   │   │   │   └── dashboardService.ts
+│   │   │   ├── types/
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts
+│   │   ├── owner/                  # Platform owner module
+│   │   │   ├── components/
+│   │   │   │   ├── OwnerKpiCards.tsx
+│   │   │   │   ├── SubscriptionChart.tsx
+│   │   │   │   └── CompaniesTable.tsx
+│   │   │   ├── hooks/
+│   │   │   ├── services/
+│   │   │   ├── types/
+│   │   │   └── index.ts
+│   │   ├── inventory/              # (to be built)
+│   │   ├── sales/                  # (to be built)
+│   │   ├── employees/              # (to be built)
+│   │   └── crm/                    # (to be built)
+│   ├── shared/                     # Shared across modules
+│   │   ├── components/
+│   │   │   ├── ui/                 # Button, Card, etc.
+│   │   │   ├── layout/
+│   │   │   │   ├── Sidebar.tsx
+│   │   │   │   ├── Header.tsx
+│   │   │   │   └── Footer.tsx
+│   │   │   └── rbac/               # Role‑based components
+│   │   ├── hooks/                  # Shared hooks (e.g., useMediaQuery)
+│   │   ├── lib/                    # API client, utils, permissions
+│   │   ├── types/                  # Global types (shared interfaces)
+│   │   ├── constants/              # Global constants
+│   │   └── providers/              # Context providers (Auth, Query)
+│   ├── styles/
+│   │   └── globals.css
+│   └── middleware.ts               # Auth & RBAC middleware
+├── .env.local
+├── package.json
+└── tsconfig.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```txt
+client/
+├── public/
+│   ├── images/
+│   ├── icons/
+│   └── logo/
+│
+├── src/
+│
+│   ├── app/                                   # Next.js App Router
+│   │
+│   │   ├── (auth)/                            # Auth Route Group
+│   │   │   ├── login/
+│   │   │   │   └── page.tsx
+│   │   │   ├── register/
+│   │   │   │   └── page.tsx
+│   │   │   ├── forgot-password/
+│   │   │   │   └── page.tsx
+│   │   │   └── reset-password/
+│   │   │       └── page.tsx
+│   │   │
+│   │   ├── (dashboard)/                       # Company Dashboard
+│   │   │   ├── dashboard/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── inventory/
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── add/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── edit/[id]/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── view/[id]/
+│   │   │   │       └── page.tsx
+│   │   │   │
+│   │   │   ├── sales/
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── add/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── edit/[id]/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── view/[id]/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── invoice/[id]/
+│   │   │   │       └── page.tsx
+│   │   │   │
+│   │   │   ├── employees/
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── add/
+│   │   │   │   ├── edit/[id]/
+│   │   │   │   └── view/[id]/
+│   │   │   │
+│   │   │   ├── crm/
+│   │   │   │   ├── customers/
+│   │   │   │   ├── leads/
+│   │   │   │   └── deals/
+│   │   │   │
+│   │   │   ├── settings/
+│   │   │   │   ├── profile/
+│   │   │   │   ├── company/
+│   │   │   │   ├── roles/
+│   │   │   │   └── permissions/
+│   │   │   │
+│   │   │   ├── analytics/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── reports/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── notifications/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   │
+│   │   ├── owner/                             # SaaS Owner Portal
+│   │   │   ├── dashboard/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── companies/
+│   │   │   │   ├── page.tsx
+│   │   │   │   └── view/[id]/
+│   │   │   │
+│   │   │   ├── subscriptions/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── analytics/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── users/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── plans/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── logs/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   ├── support/
+│   │   │   │   └── page.tsx
+│   │   │   │
+│   │   │   └── layout.tsx
+│   │   │
+│   │   ├── api/
+│   │   │   ├── auth/
+│   │   │   ├── inventory/
+│   │   │   ├── sales/
+│   │   │   └── users/
+│   │   │
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── not-found.tsx
+│   │
+│   │
+│   ├── modules/                              # Feature Modules
+│   │
+│   │   ├── auth/
+│   │   │   ├── components/
+│   │   │   │   ├── LoginForm.tsx
+│   │   │   │   ├── RegisterForm.tsx
+│   │   │   │   └── ForgotPasswordForm.tsx
+│   │   │   │
+│   │   │   ├── hooks/
+│   │   │   │   └── useAuth.ts
+│   │   │   │
+│   │   │   ├── services/
+│   │   │   │   └── auth.service.ts
+│   │   │   │
+│   │   │   ├── schemas/
+│   │   │   │   └── auth.schema.ts
+│   │   │   │
+│   │   │   ├── types/
+│   │   │   │   └── index.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── dashboard/
+│   │   │   ├── components/
+│   │   │   │   ├── KpiCardsGrid.tsx
+│   │   │   │   ├── RevenueChart.tsx
+│   │   │   │   ├── SalesPieChart.tsx
+│   │   │   │   ├── RecentOrdersTable.tsx
+│   │   │   │   ├── InventoryAlerts.tsx
+│   │   │   │   └── RecentActivityFeed.tsx
+│   │   │   │
+│   │   │   ├── hooks/
+│   │   │   │   └── useDashboardData.ts
+│   │   │   │
+│   │   │   ├── services/
+│   │   │   │   └── dashboard.service.ts
+│   │   │   │
+│   │   │   ├── types/
+│   │   │   │   └── index.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── inventory/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── services/
+│   │   │   ├── schemas/
+│   │   │   ├── store/
+│   │   │   ├── types/
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── sales/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── services/
+│   │   │   ├── schemas/
+│   │   │   ├── store/
+│   │   │   ├── types/
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── employees/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── services/
+│   │   │   ├── schemas/
+│   │   │   ├── store/
+│   │   │   ├── types/
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── crm/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── services/
+│   │   │   ├── schemas/
+│   │   │   ├── store/
+│   │   │   ├── types/
+│   │   │   └── index.ts
+│   │   │
+│   │   └── owner/
+│   │       ├── components/
+│   │       │   ├── OwnerKpiCards.tsx
+│   │       │   ├── SubscriptionChart.tsx
+│   │       │   ├── CompaniesTable.tsx
+│   │       │   └── RecentSignups.tsx
+│   │       │
+│   │       ├── hooks/
+│   │       ├── services/
+│   │       ├── schemas/
+│   │       ├── store/
+│   │       ├── types/
+│   │       └── index.ts
+│   │
+│   │
+│   ├── shared/
+│   │
+│   │   ├── components/
+│   │   │
+│   │   │   ├── ui/
+│   │   │   │   ├── Button.tsx
+│   │   │   │   ├── Card.tsx
+│   │   │   │   ├── Modal.tsx
+│   │   │   │   ├── DataTable.tsx
+│   │   │   │   ├── Input.tsx
+│   │   │   │   └── Select.tsx
+│   │   │   │
+│   │   │   ├── layout/
+│   │   │   │
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── Sidebar.tsx
+│   │   │   │   │   ├── Header.tsx
+│   │   │   │   │   └── Footer.tsx
+│   │   │   │   │
+│   │   │   │   └── owner/
+│   │   │   │       ├── OwnerSidebar.tsx
+│   │   │   │       ├── OwnerHeader.tsx
+│   │   │   │       └── OwnerFooter.tsx
+│   │   │   │
+│   │   │   └── rbac/
+│   │   │       ├── Can.tsx
+│   │   │       └── RoleGuard.tsx
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useMediaQuery.ts
+│   │   │   └── useDebounce.ts
+│   │   │
+│   │   ├── services/
+│   │   │   └── api-client.ts
+│   │   │
+│   │   ├── providers/
+│   │   │   ├── QueryProvider.tsx
+│   │   │   ├── AuthProvider.tsx
+│   │   │   └── ThemeProvider.tsx
+│   │   │
+│   │   ├── store/
+│   │   │   └── ui.store.ts
+│   │   │
+│   │   ├── lib/
+│   │   │   ├── permissions.ts
+│   │   │   ├── roles.ts
+│   │   │   ├── route-access.ts
+│   │   │   └── utils.ts
+│   │   │
+│   │   ├── constants/
+│   │   │
+│   │   ├── types/
+│   │   │
+│   │   └── config/
+│   │       ├── sidebar.ts
+│   │       └── site.ts
+│   │
+│   │
+│   ├── styles/
+│   │   └── globals.css
+│   │
+│   └── middleware.ts
+│
+├── .env.local
+├── package.json
+├── tsconfig.json
+├── next.config.js
+└── tailwind.config.js
+```
