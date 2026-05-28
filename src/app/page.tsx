@@ -1,7 +1,7 @@
-// src/app/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { 
   LayoutDashboard, 
   BarChart3, 
@@ -13,9 +13,6 @@ import {
   ArrowRight,
   Star,
   Shield,
-  Zap,
-  Globe,
-  ChevronRight,
   Menu,
   X
 } from "lucide-react";
@@ -113,11 +110,17 @@ export default function LandingPage() {
             <div className="relative">
               <div className="rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-600 p-1 shadow-2xl">
                 <div className="rounded-xl bg-white p-2">
-                  <img 
-                    src="/dashboard-preview.png" 
-                    alt="Dashboard Preview" 
+                  <Image
+                    src="/dashboard-preview.png"
+                    alt="Dashboard Preview"
+                    width={600}
+                    height={400}
                     className="w-full rounded-lg shadow-md"
-                    onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400/1e293b/ffffff?text=Dashboard+Preview"; }}
+                    onError={(e) => {
+                      // Fallback to placeholder if image not found
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://placehold.co/600x400/1e293b/ffffff?text=Dashboard+Preview";
+                    }}
                   />
                 </div>
               </div>
@@ -238,7 +241,7 @@ export default function LandingPage() {
                 <div className="flex gap-1 text-yellow-400">
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
                 </div>
-                <p className="mt-4 text-gray-700">"{testimonial.text}"</p>
+                <p className="mt-4 text-gray-700">&ldquo;{testimonial.text}&rdquo;</p>
                 <div className="mt-6 flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-gray-300" />
                   <div>
@@ -252,7 +255,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing (simple) */}
+      {/* Pricing */}
       <section id="pricing" className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">

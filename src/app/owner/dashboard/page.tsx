@@ -14,7 +14,7 @@ export default function OwnerDashboardPage() {
       <div className="rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white shadow-md">
         <h3 className="text-2xl font-bold">Application Owner Dashboard</h3>
         <p className="mt-1 text-indigo-100">
-          Overview of your platform's growth, subscriptions, and company metrics.
+          Overview of your platform&apos;s growth, subscriptions, and company metrics.
         </p>
       </div>
 
