@@ -27,16 +27,16 @@ export function useAuth() {
         sessionStorage.setItem('user', JSON.stringify(data.user));
       }
       return true;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Login failed';
+      setError(message);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
 
-
-   const register = async (data: RegisterData) => {
+  const register = async (data: RegisterData) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -52,12 +52,14 @@ export function useAuth() {
       localStorage.setItem('access_token', result.access_token);
       localStorage.setItem('user', JSON.stringify(result.user));
       return true;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Registration failed';
+      setError(message);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
+
   return { login, register, isLoading, error };
 }

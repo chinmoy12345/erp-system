@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { checkRouteAccess } from '@/shared/lib/route-access';
-import { getPermissionsForRole } from '@/shared/lib/permissions';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('access_token')?.value;
